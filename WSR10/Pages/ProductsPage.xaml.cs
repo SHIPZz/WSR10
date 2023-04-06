@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WSR10.Classes;
 using WSR10.Model;
 
@@ -82,7 +72,7 @@ namespace WSR10.Pages
 
         private void BuyBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(ListObj.products.Count > 8)
+            if (ListObj.products.Count > 8)
             {
                 MessageBox.Show("Корзина переполнена");
                 return;
@@ -97,16 +87,15 @@ namespace WSR10.Pages
         private void BuyClick_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new SelectedProductsPage());
-
         }
 
         private void SearchTxtBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var currentProduct = ConnectionObj.tradeEntities.Product.Where(x=>x.ProductName.ToLower().Contains(SearchTxtBox.Text.ToLower())).ToList();  
+            var currentProduct = ConnectionObj.tradeEntities.Product.Where(x => x.ProductName.ToLower().Contains(SearchTxtBox.Text.ToLower())).ToList();
 
             ProductList.ItemsSource = currentProduct;
 
-            if(SearchTxtBox.Text == "")
+            if (SearchTxtBox.Text == "")
             {
                 ProductList.ItemsSource = ConnectionObj.tradeEntities.Product.ToList();
             }
@@ -121,15 +110,14 @@ namespace WSR10.Pages
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            if(ComboBox.SelectedIndex == 0)
+            if (ComboBox.SelectedIndex == 0)
             {
                 var currentProducts = ConnectionObj.tradeEntities.Product.OrderBy(x => x.ProductCost).ToList();
 
                 ProductList.ItemsSource = currentProducts;
             }
 
-            if(ComboBox.SelectedIndex == 1)
+            if (ComboBox.SelectedIndex == 1)
             {
                 var currentProducts = ConnectionObj.tradeEntities.Product.OrderByDescending(x => x.ProductCost).ToList();
 
